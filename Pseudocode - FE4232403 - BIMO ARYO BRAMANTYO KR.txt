@@ -1,0 +1,33 @@
+PEMESANAN MAKANAN ATAU MINUMAM VIA ONLINE
+
+Start
+
+SHOW "ListMenu"
+
+READ AND WRITE "SelectedMenu" with String
+READ AND WRITE "Quantity" with Number
+READ AND WRITE "Price" with Number
+STORE "SelectedMenu"
+STORE "Quantity"
+STORE "Price"
+
+STORE "Order" with False
+
+IF "Order" == True
+    READ AND WRITE "TotalBill" with Number
+    STORE "TotalBill" with CALCULATE "Quantity" multiply by "Price"
+ELSE
+    GOTO "ListMenu"
+ENDIF
+
+READ AND WRITE "UserAddress" with String
+STORE "UserAddress"
+
+CHOOSE PaymentMethod
+    STORE "Balance" with Number
+    IF "Balance" >= "TotalBill"
+        ProcessingPayment
+    ELSE
+        GOTO "PaymentMethod"
+
+END
